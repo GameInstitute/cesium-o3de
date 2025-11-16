@@ -20,7 +20,7 @@ namespace Cesium
     {
     public:
         AZ_RTTI(CesiumModuleInterface, "{fedbdb52-4657-4029-a6d2-e7152676b7c7}", AZ::Module);
-        AZ_CLASS_ALLOCATOR(CesiumModuleInterface, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(CesiumModuleInterface, AZ::SystemAllocator);
 
         CesiumModuleInterface()
         {

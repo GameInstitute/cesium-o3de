@@ -16,7 +16,7 @@ namespace Cesium
     {
     public:
         AZ_RTTI(CesiumEditorModule, "{a927ae40-0be8-4c12-b776-f866e93538a0}", CesiumModuleInterface);
-        AZ_CLASS_ALLOCATOR(CesiumEditorModule, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(CesiumEditorModule, AZ::SystemAllocator);
 
         CesiumEditorModule()
         {

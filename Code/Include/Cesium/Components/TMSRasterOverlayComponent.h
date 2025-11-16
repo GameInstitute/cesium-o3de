@@ -12,7 +12,7 @@ namespace Cesium
     struct TMSRasterOverlaySource final
     {
         AZ_RTTI(TMSRasterOverlaySource, "{0A2B78F3-A2B6-44FE-8091-2A3CCBA07FC5}");
-        AZ_CLASS_ALLOCATOR(TMSRasterOverlaySource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TMSRasterOverlaySource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

@@ -4,21 +4,17 @@
 #include <AzCore/UnitTest/TestTypes.h>
 #include <CesiumAsync/AsyncSystem.h>
 
-class HttpAssetAccessorTest : public UnitTest::AllocatorsTestFixture
+class HttpAssetAccessorTest : public UnitTest::LeakDetectionFixture
 {
 public:
     void SetUp() override
     {
-        UnitTest::AllocatorsTestFixture::SetUp();
-        AZ::AllocatorInstance<AZ::PoolAllocator>::Create();
-        AZ::AllocatorInstance<AZ::ThreadPoolAllocator>::Create();
+        UnitTest::LeakDetectionFixture::SetUp();
     }
 
     void TearDown() override
     {
-        AZ::AllocatorInstance<AZ::ThreadPoolAllocator>::Destroy();
-        AZ::AllocatorInstance<AZ::PoolAllocator>::Destroy();
-        UnitTest::AllocatorsTestFixture::TearDown();
+        UnitTest::LeakDetectionFixture::TearDown();
     }
 };
 

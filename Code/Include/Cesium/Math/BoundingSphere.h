@@ -10,7 +10,7 @@ namespace Cesium
     struct BoundingSphere final
     {
         AZ_RTTI(BoundingSphere, "{A3719F14-B8C2-48A3-96E5-A2FA2A162FAD}");
-        AZ_CLASS_ALLOCATOR(BoundingSphere, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(BoundingSphere, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

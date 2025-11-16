@@ -356,7 +356,7 @@ namespace Cesium
         return m_tilesetConfiguration;
     }
 
-    AZ::Aabb TilesetComponent::GetWorldBounds()
+    AZ::Aabb TilesetComponent::GetWorldBounds() const
     {
         if (!m_impl->m_tileset)
         {
@@ -372,7 +372,7 @@ namespace Cesium
         return std::visit(BoundingVolumeToAABB{ m_impl->m_absToRelWorld * m_transform }, rootTile->getBoundingVolume());
     }
 
-    AZ::Aabb TilesetComponent::GetLocalBounds()
+    AZ::Aabb TilesetComponent::GetLocalBounds() const
     {
         if (!m_impl->m_tileset)
         {

@@ -20,7 +20,7 @@ namespace Cesium
     struct RasterOverlayConfiguration final
     {
         AZ_RTTI(RasterOverlayConfiguration, "{93E95361-BCE5-4769-BE1F-F777B1F6F071}");
-        AZ_CLASS_ALLOCATOR(RasterOverlayConfiguration, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(RasterOverlayConfiguration, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

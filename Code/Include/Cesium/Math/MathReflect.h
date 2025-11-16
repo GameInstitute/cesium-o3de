@@ -232,7 +232,7 @@ namespace Cesium
     {
     public:
         AZ_RTTI(GlmVecJsonSerializer, "{338EA004-2521-4052-BB64-A8505F3ABBD7}", AZ::BaseJsonSerializer);
-        AZ_CLASS_ALLOCATOR(GlmVecJsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmVecJsonSerializer, AZ::SystemAllocator);
 
         AZ::JsonSerializationResult::Result Load(
             void* outputValue,
@@ -321,7 +321,7 @@ namespace Cesium
     {
     public:
         AZ_RTTI(GlmDMatJsonSerializer, "{44B47C67-E32F-48E9-BFF0-20C3620F49E1}", AZ::BaseJsonSerializer);
-        AZ_CLASS_ALLOCATOR(GlmDMatJsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDMatJsonSerializer, AZ::SystemAllocator);
 
         AZ::JsonSerializationResult::Result Load(
             void* outputValue,
@@ -426,48 +426,48 @@ namespace Cesium
     {
     public:
         AZ_RTTI(GlmDVec2JsonSerializer, "{179887FA-8034-4264-B6A1-216D6A7FD16C}", GlmVecJsonSerializer<glm::dvec2>);
-        AZ_CLASS_ALLOCATOR(GlmDVec2JsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDVec2JsonSerializer, AZ::SystemAllocator);
     };
 
     class GlmDVec3JsonSerializer : public GlmVecJsonSerializer<glm::dvec3>
     {
     public:
         AZ_RTTI(GlmDVec3JsonSerializer, "{9BCD6B7B-845D-4073-B20C-1C822861A1AA}", GlmVecJsonSerializer<glm::dvec3>);
-        AZ_CLASS_ALLOCATOR(GlmDVec3JsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDVec3JsonSerializer, AZ::SystemAllocator);
     };
 
     class GlmDVec4JsonSerializer : public GlmVecJsonSerializer<glm::dvec4>
     {
     public:
         AZ_RTTI(GlmDVec4JsonSerializer, "{1A1F8E80-6408-4224-B0FC-8E0F9DD6B119}", GlmVecJsonSerializer<glm::dvec4>);
-        AZ_CLASS_ALLOCATOR(GlmDVec4JsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDVec4JsonSerializer, AZ::SystemAllocator);
     };
 
     class GlmDQuatJsonSerializer : public GlmVecJsonSerializer<glm::dquat>
     {
     public:
         AZ_RTTI(GlmDQuatJsonSerializer, "{CDCD546F-EEFE-44AD-B525-2E00C8E2FC52}", GlmVecJsonSerializer<glm::dquat>);
-        AZ_CLASS_ALLOCATOR(GlmDQuatJsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDQuatJsonSerializer, AZ::SystemAllocator);
     };
 
     class GlmDMat2JsonSerializer : public GlmDMatJsonSerializer<glm::dmat2>
     {
     public:
         AZ_RTTI(GlmDMat2JsonSerializer, "{91F705E2-522E-4CF5-BFB9-688E3B510E2F}", GlmDMatJsonSerializer<glm::dmat2>);
-        AZ_CLASS_ALLOCATOR(GlmDMat2JsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDMat2JsonSerializer, AZ::SystemAllocator);
     };
 
     class GlmDMat3JsonSerializer : public GlmDMatJsonSerializer<glm::dmat3>
     {
     public:
         AZ_RTTI(GlmDMat3JsonSerializer, "{2707FC00-7EED-44AC-860B-A6165469553E}", GlmDMatJsonSerializer<glm::dmat3>);
-        AZ_CLASS_ALLOCATOR(GlmDMat3JsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDMat3JsonSerializer, AZ::SystemAllocator);
     };
 
     class GlmDMat4JsonSerializer : public GlmDMatJsonSerializer<glm::dmat4>
     {
     public:
         AZ_RTTI(GlmDMat4JsonSerializer, "{C268E7C8-1FBE-4560-A34D-CFCEA9E1D7C8}", GlmDMatJsonSerializer<glm::dmat4>);
-        AZ_CLASS_ALLOCATOR(GlmDMat4JsonSerializer, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GlmDMat4JsonSerializer, AZ::SystemAllocator);
     };
 } // namespace Cesium

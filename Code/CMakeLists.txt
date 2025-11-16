@@ -1,31 +1,51 @@
+#
+# Copyright (c) Contributors to the Open 3D Engine Project.
+# For complete copyright and license terms please see the LICENSE at the root of this distribution.
+#
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+#
 
-# Currently we are in the Code folder: ${CMAKE_CURRENT_LIST_DIR}
-# Get the platform specific folder ${pal_dir} for the current folder: ${CMAKE_CURRENT_LIST_DIR}/Platform/${PAL_PLATFORM_NAME}
-# Note: ly_get_list_relative_pal_filename will take care of the details for us, as this may be a restricted platform
-#       in which case it will see if that platform is present here or in the restricted folder.
-#       i.e. It could here in our gem : Gems/Cesium/Code/Platform/<platorm_name>  or
-#            <restricted_folder>/<platform_name>/Gems/Cesium/Code
-ly_get_list_relative_pal_filename(pal_dir ${CMAKE_CURRENT_LIST_DIR}/Platform/${PAL_PLATFORM_NAME} ${o3de_gem_restricted_path} ${o3de_gem_path} ${o3de_gem_name})
+# Include platform-specific configuration
+if(LY_MONOLITHIC_GAME)
+    include(Platform/${PAL_PLATFORM_NAME}/platform_${PAL_PLATFORM_NAME_LOWERCASE}.cmake OPTIONAL)
+else()
+    include(Platform/${PAL_PLATFORM_NAME}/platform_${PAL_PLATFORM_NAME_LOWERCASE}.cmake)
+endif()
 
-# Now that we have the platform abstraction layer (PAL) folder for this folder, thats where we will find the
-# traits for this platform. Traits for a platform are defines for things like whether or not something in this gem
-# is supported by this platform.
-include(${pal_dir}/PAL_${PAL_PLATFORM_NAME_LOWERCASE}.cmake)
+# Include PAL traits for platform support flags
+include(Platform/${PAL_PLATFORM_NAME}/PAL_${PAL_PLATFORM_NAME_LOWERCASE}.cmake)
 
 # Add CesiumNative as a third party
 set(LY_PACKAGE_SERVER_URLS "${LY_PACKAGE_SERVER_URLS};file:///${CMAKE_CURRENT_LIST_DIR}/../External/Packages/Install" FORCE)
-file(READ ${CMAKE_CURRENT_LIST_DIR}/../External/Packages/Install/SHA256SUMS CesiumNative_SHA256_PACKAGE)
-ly_associate_package(PACKAGE_NAME CesiumNative TARGETS CesiumNative PACKAGE_HASH ${CesiumNative_SHA256_PACKAGE})
+set(SHA256SUMS_FILE "${CMAKE_CURRENT_LIST_DIR}/../External/Packages/Install/SHA256SUMS")
+if(EXISTS ${SHA256SUMS_FILE})
+    file(READ ${SHA256SUMS_FILE} CesiumNative_SHA256_PACKAGE)
+    string(STRIP ${CesiumNative_SHA256_PACKAGE} CesiumNative_SHA256_PACKAGE)
+    ly_associate_package(PACKAGE_NAME CesiumNative TARGETS CesiumNative PACKAGE_HASH ${CesiumNative_SHA256_PACKAGE})
+else()
+    # SHA256SUMS file doesn't exist yet - this means External package needs to be built first
+    # For development builds, we'll use a placeholder hash that will be replaced when the package is built
+    # Note: You need to build External/CMakeLists.txt first to generate the SHA256SUMS file
+    message(STATUS "CesiumNative SHA256SUMS file not found at ${SHA256SUMS_FILE}.")
+    message(STATUS "To generate it, build the External package first:")
+    message(STATUS "  cd External")
+    message(STATUS "  cmake -B Build -S .")
+    message(STATUS "  cmake --build Build --config release --target install")
+    message(STATUS "Using placeholder hash for now. This is safe for initial CMake configuration.")
+    # Use a placeholder hash - this should be replaced after building External package
+    set(CesiumNative_SHA256_PACKAGE "0000000000000000000000000000000000000000000000000000000000000000")
+    ly_associate_package(PACKAGE_NAME CesiumNative TARGETS CesiumNative PACKAGE_HASH ${CesiumNative_SHA256_PACKAGE})
+endif()
 
 # Add the Cesium.Static target
-# Note: We include the common files and the platform specific files which are set in cesium_common_files.cmake
-# and in ${pal_dir}/cesium_${PAL_PLATFORM_NAME_LOWERCASE}_files.cmake
+# Note: We include the common files and the platform specific files which are set in cesium_files.cmake
+# and in Platform/${PAL_PLATFORM_NAME}/cesium_${PAL_PLATFORM_NAME_LOWERCASE}_files.cmake
 ly_add_target(
     NAME Cesium.Static STATIC
     NAMESPACE Gem
     FILES_CMAKE
         cesium_files.cmake
-        ${pal_dir}/cesium_${PAL_PLATFORM_NAME_LOWERCASE}_files.cmake
+        Platform/${PAL_PLATFORM_NAME}/cesium_${PAL_PLATFORM_NAME_LOWERCASE}_files.cmake
     INCLUDE_DIRECTORIES
         PUBLIC
             Include
@@ -39,10 +59,8 @@ ly_add_target(
             3rdParty::zlib
             AZ::AzCore
             AZ::AzFramework
-            AZ::AWSNativeSDKInit
             Legacy::CryCommon
             Gem::Atom_RPI.Public
-            Gem::Atom_Feature_Common.Static
             Gem::LyShine.Static
     COMPILE_DEFINITIONS
         PUBLIC
@@ -57,7 +75,7 @@ ly_add_target(
     NAMESPACE Gem
     FILES_CMAKE
         cesium_shared_files.cmake
-        ${pal_dir}/cesium_shared_${PAL_PLATFORM_NAME_LOWERCASE}_files.cmake
+        Platform/${PAL_PLATFORM_NAME}/cesium_shared_${PAL_PLATFORM_NAME_LOWERCASE}_files.cmake
     INCLUDE_DIRECTORIES
         PRIVATE
             Source

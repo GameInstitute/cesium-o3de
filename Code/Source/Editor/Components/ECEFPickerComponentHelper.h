@@ -28,7 +28,7 @@ namespace Cesium
         struct DegreeCartographic final
         {
             AZ_RTTI(DegreeCartographic, "{477784B5-7A3D-4721-88CD-99A147BABFB0}");
-            AZ_CLASS_ALLOCATOR(DegreeCartographic, AZ::SystemAllocator, 0);
+            AZ_CLASS_ALLOCATOR(DegreeCartographic, AZ::SystemAllocator);
 
             static void Reflect(AZ::ReflectContext* context);
 
@@ -43,7 +43,7 @@ namespace Cesium
 
     public:
         AZ_RTTI(ECEFPickerComponentHelper, "{F8AAE323-83AC-4B8B-8BB8-D3CD27DD85E2}");
-        AZ_CLASS_ALLOCATOR(ECEFPickerComponentHelper, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(ECEFPickerComponentHelper, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

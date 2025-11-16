@@ -25,7 +25,7 @@ namespace Cesium
     struct BingRasterOverlaySource final
     {
         AZ_RTTI(BingRasterOverlaySource, "{D4B30641-8873-431D-AF30-C4B45083A334}");
-        AZ_CLASS_ALLOCATOR(BingRasterOverlaySource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(BingRasterOverlaySource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

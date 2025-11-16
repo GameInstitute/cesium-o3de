@@ -9,7 +9,7 @@ namespace Cesium
     struct BoundingRegion final
     {
         AZ_RTTI(BoundingRegion, "{334B313B-0598-4572-AACE-9CFA8074F4C5}");
-        AZ_CLASS_ALLOCATOR(BoundingRegion, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(BoundingRegion, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

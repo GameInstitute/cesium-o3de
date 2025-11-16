@@ -9,7 +9,7 @@ namespace Cesium
     struct CesiumIonRasterOverlaySource final
     {
         AZ_RTTI(CesiumIonRasterOverlaySource, "{052B64CD-ED19-4ECC-AE78-721F4E90D629}");
-        AZ_CLASS_ALLOCATOR(CesiumIonRasterOverlaySource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(CesiumIonRasterOverlaySource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

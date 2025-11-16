@@ -14,7 +14,7 @@ namespace Cesium
     struct TilesetConfiguration final
     {
         AZ_RTTI(TilesetConfiguration, "{13578DDF-7A60-4851-821C-A5238F222611}");
-        AZ_CLASS_ALLOCATOR(TilesetConfiguration, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TilesetConfiguration, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 
@@ -41,7 +41,7 @@ namespace Cesium
     struct TilesetRenderConfiguration final
     {
         AZ_RTTI(TilesetRenderConfiguration, "{141F2DE1-CEEB-4ACD-BCCA-2F7F6CEF60B6}");
-        AZ_CLASS_ALLOCATOR(TilesetRenderConfiguration, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TilesetRenderConfiguration, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 
@@ -56,7 +56,7 @@ namespace Cesium
     struct TilesetLocalFileSource final
     {
         AZ_RTTI(TilesetLocalFileSource, "{80F811DB-AD4D-4BAD-AB08-F63765DC6D1E}");
-        AZ_CLASS_ALLOCATOR(TilesetLocalFileSource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TilesetLocalFileSource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 
@@ -66,7 +66,7 @@ namespace Cesium
     struct TilesetUrlSource final
     {
         AZ_RTTI(TilesetUrlSource, "{03E43702-DAB4-48A7-B71B-6EC012418134}");
-        AZ_CLASS_ALLOCATOR(TilesetUrlSource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TilesetUrlSource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 
@@ -76,7 +76,7 @@ namespace Cesium
     struct TilesetCesiumIonSource final
     {
         AZ_RTTI(TilesetCesiumIonSource, "{16423510-6EDE-4F45-8C6E-C8C965D70B66}");
-        AZ_CLASS_ALLOCATOR(TilesetCesiumIonSource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TilesetCesiumIonSource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 
@@ -96,7 +96,7 @@ namespace Cesium
     {
     public:
         AZ_RTTI(TilesetSource, "{AA390F90-E695-4753-8F7C-D7E5AE9BE830}");
-        AZ_CLASS_ALLOCATOR(TilesetSource, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(TilesetSource, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

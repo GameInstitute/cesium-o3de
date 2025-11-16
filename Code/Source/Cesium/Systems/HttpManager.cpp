@@ -1,6 +1,6 @@
 #include "Cesium/Systems/HttpManager.h"
 #include <AzFramework/AzFramework_Traits_Platform.h>
-#include <AWSNativeSDKInit/AWSNativeSDKInit.h>
+#include <aws/core/Aws.h>
 #include <AzCore/PlatformDef.h>
 #include <AzCore/Utils/Utils.h>
 #include <AzCore/Jobs/JobManager.h>
@@ -123,7 +123,8 @@ namespace Cesium
         m_ioJobContext = AZStd::make_unique<AZ::JobContext>(*m_ioJobManager);
 
         AZ::Utils::SetEnv("AWS_EC2_METADATA_DISABLED", "True", true);
-        AWSNativeSDKInit::InitializationManager::InitAwsApi();
+        Aws::SDKOptions options;
+        Aws::InitAPI(options);
 
         Aws::Client::ClientConfiguration config;
         config.enableTcpKeepAlive = AZ_TRAIT_AZFRAMEWORK_AWS_ENABLE_TCP_KEEP_ALIVE_SUPPORTED;
@@ -135,7 +136,8 @@ namespace Cesium
         m_ioJobContext.reset();
         m_ioJobManager.reset();
         m_awsHttpClient.reset();
-        AWSNativeSDKInit::InitializationManager::Shutdown();
+        Aws::SDKOptions options;
+        Aws::ShutdownAPI(options);
     }
 
     CesiumAsync::Future<HttpResult> HttpManager::AddRequest(

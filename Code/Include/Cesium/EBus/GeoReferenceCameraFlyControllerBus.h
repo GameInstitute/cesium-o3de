@@ -10,7 +10,7 @@ namespace Cesium
     struct GeoreferenceCameraFlyConfiguration final
     {
         AZ_RTTI(GeoreferenceCameraFlyConfiguration, "{F109FC09-ADDD-4AE6-91A2-CAE628B93311}");
-        AZ_CLASS_ALLOCATOR(GeoreferenceCameraFlyConfiguration, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(GeoreferenceCameraFlyConfiguration, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* reflectContext);
 

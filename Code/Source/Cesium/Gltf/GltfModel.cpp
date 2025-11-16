@@ -1,6 +1,7 @@
 #include "Cesium/Gltf/GltfModel.h"
 #include "Cesium/Gltf/GltfLoadContext.h"
 #include <Atom/RPI.Public/Image/StreamingImage.h>
+#include <AtomLyIntegration/CommonFeatures/Material/MaterialAssignment.h>
 #include <AzCore/std/algorithm.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -49,10 +50,20 @@ namespace Cesium
 
                 if (loadPrimitive.m_materialId >= 0 && loadPrimitive.m_materialId < m_materials.size())
                 {
-                    auto meshHandle = m_meshFeatureProcessor->AcquireMesh(
-                        AZ::Render::MeshHandleDescriptor{ loadPrimitive.m_modelAsset, false, false, {} },
-                        m_materials[loadPrimitive.m_materialId].m_material);
+                    AZ::Render::MeshHandleDescriptor descriptor;
+                    descriptor.m_modelAsset = loadPrimitive.m_modelAsset;
+                    auto meshHandle = m_meshFeatureProcessor->AcquireMesh(descriptor);
                     m_meshFeatureProcessor->SetTransform(meshHandle, o3deTransform, o3deScale);
+
+                    // Set material assignment map after acquiring the mesh
+                    if (loadPrimitive.m_materialId >= 0 && loadPrimitive.m_materialId < m_materials.size())
+                    {
+                        AZ::Render::MaterialAssignmentMap materialAssignmentMap;
+                        materialAssignmentMap[AZ::Render::DefaultMaterialAssignmentId].m_materialInstance = m_materials[loadPrimitive.m_materialId].m_material;
+                        materialAssignmentMap[AZ::Render::DefaultMaterialAssignmentId].m_materialInstancePreCreated = true;
+                        AZ::Render::CustomMaterialMap customMaterialMap = AZ::Render::ConvertToCustomMaterialMap(materialAssignmentMap);
+                        m_meshFeatureProcessor->SetCustomMaterials(meshHandle, customMaterialMap);
+                    }
 
                     GltfPrimitive primitive;
                     primitive.m_meshHandle = std::move(meshHandle);
@@ -115,9 +126,13 @@ namespace Cesium
 
     void GltfModel::UpdateMaterialForPrimitive(GltfPrimitive& primitive)
     {
-        if (primitive.m_materialIndex >= 0)
+        if (primitive.m_materialIndex >= 0 && primitive.m_materialIndex < m_materials.size())
         {
-            m_meshFeatureProcessor->SetMaterialAssignmentMap(primitive.m_meshHandle, m_materials[primitive.m_materialIndex].m_material);
+            AZ::Render::MaterialAssignmentMap materialAssignmentMap;
+            materialAssignmentMap[AZ::Render::DefaultMaterialAssignmentId].m_materialInstance = m_materials[primitive.m_materialIndex].m_material;
+            materialAssignmentMap[AZ::Render::DefaultMaterialAssignmentId].m_materialInstancePreCreated = true;
+            AZ::Render::CustomMaterialMap customMaterialMap = AZ::Render::ConvertToCustomMaterialMap(materialAssignmentMap);
+            m_meshFeatureProcessor->SetCustomMaterials(primitive.m_meshHandle, customMaterialMap);
         }
     }
 

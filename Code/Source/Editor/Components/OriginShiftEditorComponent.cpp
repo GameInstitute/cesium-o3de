@@ -1,6 +1,7 @@
 #include "Editor/Components/OriginShiftEditorComponent.h"
 #include <Cesium/Math/MathReflect.h>
 #include <AzToolsFramework/API/ToolsApplicationAPI.h>
+#include <AzToolsFramework/UI/PropertyEditor/PropertyEditorAPI.h>
 #include <AtomToolsFramework/Viewport/ModularViewportCameraControllerRequestBus.h>
 #include <Atom/RPI.Public/ViewportContext.h>
 #include <Atom/RPI.Public/ViewportContextBus.h>
@@ -152,7 +153,8 @@ namespace Cesium
                 AtomToolsFramework::ModularViewportCameraControllerRequestBus::Event(
                     viewportContextPtr->GetId(),
                     &AtomToolsFramework::ModularViewportCameraControllerRequestBus::Events::InterpolateToTransform,
-                    AZ::Transform::CreateIdentity());
+                    AZ::Transform::CreateIdentity(),
+                    1.0f); // 1 second interpolation duration
             });
     }
 

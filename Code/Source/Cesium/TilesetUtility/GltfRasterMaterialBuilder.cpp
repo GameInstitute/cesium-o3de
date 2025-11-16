@@ -2,6 +2,8 @@
 #include "Cesium/Systems/CesiumSystem.h"
 #include "Cesium/Systems/CriticalAssetManager.h"
 #include <Atom/RPI.Reflect/Material/MaterialAssetCreator.h>
+#include <Atom/RPI.Public/Material/Material.h>
+#include <Atom/RPI.Reflect/Material/MaterialPropertyValue.h>
 
 namespace Cesium
 {
@@ -50,7 +52,7 @@ namespace Cesium
         AZStd::string prefix = AZStd::string::format("raster%d", rasterLayer);
 
         AZ::RPI::MaterialAssetCreator materialCreator;
-        materialCreator.Begin(AZ::Uuid::CreateRandom(), parent->GetMaterialTypeAsset(), true);
+        materialCreator.Begin(AZ::Uuid::CreateRandom(), parent->GetMaterialTypeAsset());
         materialCreator.SetPropertyValue(AZ::Name(prefix + ".textureMap"), raster);
         materialCreator.SetPropertyValue(AZ::Name(prefix + ".useTexture"), true);
         materialCreator.SetPropertyValue(AZ::Name(prefix + ".textureMapUv"), textureUv);
@@ -91,7 +93,7 @@ namespace Cesium
         AZStd::string prefix = AZStd::string::format("raster%d", rasterLayer);
 
         auto rasterMapIndex = material->FindPropertyIndex(AZ::Name(prefix + ".textureMap"));
-        material->SetPropertyValue(rasterMapIndex, AZ::Data::Asset<AZ::RPI::ImageAsset>());
+        material->SetPropertyValue(rasterMapIndex, AZ::RPI::MaterialPropertyValue(AZ::Data::Asset<AZ::RPI::ImageAsset>()));
 
         auto useRasterMapIndex = material->FindPropertyIndex(AZ::Name(prefix + ".useTexture"));
         material->SetPropertyValue(useRasterMapIndex, false);

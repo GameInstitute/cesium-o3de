@@ -11,7 +11,7 @@ namespace Cesium
     struct OrientedBoundingBox final
     {
         AZ_RTTI(OrientedBoundingBox, "{FDCE303D-0087-4179-ACD0-2236E449ECDD}");
-        AZ_CLASS_ALLOCATOR(OrientedBoundingBox, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(OrientedBoundingBox, AZ::SystemAllocator);
 
         static void Reflect(AZ::ReflectContext* context);
 

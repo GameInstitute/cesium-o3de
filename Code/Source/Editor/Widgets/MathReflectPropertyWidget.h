@@ -210,7 +210,7 @@ namespace Cesium
     class DVector2PropertyHandler : public DoubleVectorPropertyHandlerBase<glm::dvec2>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DVector2PropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DVector2PropertyHandler, AZ::SystemAllocator);
 
         DVector2PropertyHandler()
             : DoubleVectorPropertyHandlerBase(2){};
@@ -224,7 +224,7 @@ namespace Cesium
     class DVector3PropertyHandler : public DoubleVectorPropertyHandlerBase<glm::dvec3>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DVector3PropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DVector3PropertyHandler, AZ::SystemAllocator);
 
         DVector3PropertyHandler()
             : DoubleVectorPropertyHandlerBase(3){};
@@ -238,7 +238,7 @@ namespace Cesium
     class DVector4PropertyHandler : public DoubleVectorPropertyHandlerBase<glm::dvec4>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DVector4PropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DVector4PropertyHandler, AZ::SystemAllocator);
 
         DVector4PropertyHandler()
             : DoubleVectorPropertyHandlerBase(4){};
@@ -252,7 +252,7 @@ namespace Cesium
     class DQuatPropertyHandler : public DoubleVectorPropertyHandlerBase<glm::dquat>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DQuatPropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DQuatPropertyHandler, AZ::SystemAllocator);
 
         DQuatPropertyHandler()
             : DoubleVectorPropertyHandlerBase(4){};
@@ -266,7 +266,7 @@ namespace Cesium
     class DMatrix2PropertyHandler : public DoubleMatrixPropertyHandlerBase<glm::dmat2>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DMatrix2PropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DMatrix2PropertyHandler, AZ::SystemAllocator);
 
         DMatrix2PropertyHandler()
             : DoubleMatrixPropertyHandlerBase(2, 2){};
@@ -280,7 +280,7 @@ namespace Cesium
     class DMatrix3PropertyHandler : public DoubleMatrixPropertyHandlerBase<glm::dmat3>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DMatrix3PropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DMatrix3PropertyHandler, AZ::SystemAllocator);
 
         DMatrix3PropertyHandler()
             : DoubleMatrixPropertyHandlerBase(3, 3){};
@@ -294,7 +294,7 @@ namespace Cesium
     class DMatrix4PropertyHandler : public DoubleMatrixPropertyHandlerBase<glm::dmat4>
     {
     public:
-        AZ_CLASS_ALLOCATOR(DMatrix4PropertyHandler, AZ::SystemAllocator, 0);
+        AZ_CLASS_ALLOCATOR(DMatrix4PropertyHandler, AZ::SystemAllocator);
 
         DMatrix4PropertyHandler()
             : DoubleMatrixPropertyHandlerBase(4, 4){};
