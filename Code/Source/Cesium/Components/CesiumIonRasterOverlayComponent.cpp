@@ -97,6 +97,19 @@ namespace Cesium
 
     std::unique_ptr<Cesium3DTilesSelection::RasterOverlay> CesiumIonRasterOverlayComponent::LoadRasterOverlayImpl()
     {
+        if (m_source.m_ionAssetId == 0)
+        {
+            AZ_Warning("Cesium", false, "CesiumIonRasterOverlayComponent: Ion Asset ID is 0. Please set a valid Ion Asset ID.");
+            return nullptr;
+        }
+
+        if (m_source.m_ionToken.empty())
+        {
+            AZ_Warning("Cesium", false, "CesiumIonRasterOverlayComponent: Ion Access Token is empty. Please set a valid Ion Access Token.");
+            return nullptr;
+        }
+
+        AZ_Printf("Cesium", "Loading Cesium Ion Raster Overlay with Asset ID: %u", m_source.m_ionAssetId);
         return std::make_unique<Cesium3DTilesSelection::IonRasterOverlay>(
             "CesiumIonRasterOverlay", m_source.m_ionAssetId, m_source.m_ionToken.c_str());
     }

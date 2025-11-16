@@ -48,6 +48,13 @@ namespace Cesium
             materialTypeAsset = GetDefaultMaterialType();
         }
 
+        // Validate material type asset
+        if (!materialTypeAsset || !materialTypeAsset.IsReady())
+        {
+            AZ_Error("Cesium", false, "MaterialTypeAsset is null or not ready. Cannot create material asset.");
+            return;
+        }
+
         AZ::Data::AssetId materialAssetId = CesiumInterface::Get()->GetCriticalAssetManager().GenerateRandomAssetId();
         AZ::RPI::MaterialAssetCreator materialCreator;
         materialCreator.Begin(materialAssetId, materialTypeAsset);

@@ -49,10 +49,23 @@ namespace Cesium
         const AZ::Vector4& uvTranslateScale,
         const AZ::Data::Asset<AZ::RPI::MaterialAsset>& parent)
     {
+        if (!parent || !parent.IsReady())
+        {
+            AZ_Error("Cesium", false, "Parent MaterialAsset is null or not ready. Cannot create raster material.");
+            return {};
+        }
+
+        auto materialTypeAsset = parent->GetMaterialTypeAsset();
+        if (!materialTypeAsset || !materialTypeAsset.IsReady())
+        {
+            AZ_Error("Cesium", false, "MaterialTypeAsset from parent is null or not ready. Cannot create raster material.");
+            return {};
+        }
+
         AZStd::string prefix = AZStd::string::format("raster%d", rasterLayer);
 
         AZ::RPI::MaterialAssetCreator materialCreator;
-        materialCreator.Begin(AZ::Uuid::CreateRandom(), parent->GetMaterialTypeAsset());
+        materialCreator.Begin(AZ::Uuid::CreateRandom(), materialTypeAsset);
         materialCreator.SetPropertyValue(AZ::Name(prefix + ".textureMap"), raster);
         materialCreator.SetPropertyValue(AZ::Name(prefix + ".useTexture"), true);
         materialCreator.SetPropertyValue(AZ::Name(prefix + ".textureMapUv"), textureUv);

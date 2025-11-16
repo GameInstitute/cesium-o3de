@@ -129,6 +129,12 @@ namespace Cesium
         Deactivate();
 
         auto rasterOverlay = LoadRasterOverlayImpl();
+        if (!rasterOverlay)
+        {
+            AZ_Warning("Cesium", false, "RasterOverlayComponent: Failed to create raster overlay. Check component configuration.");
+            return;
+        }
+
         m_impl->m_rasterOverlayObserverPtr = rasterOverlay.get();
 
         bool success = false;
@@ -136,6 +142,7 @@ namespace Cesium
             success, GetEntityId(), &RasterOverlayContainerRequestBus::Events::AddRasterOverlay, rasterOverlay);
         if (!success)
         {
+            AZ_Warning("Cesium", false, "RasterOverlayComponent: Failed to add raster overlay to tileset. Make sure a TilesetComponent is present on the same entity.");
             m_impl->m_rasterOverlayObserverPtr = nullptr;
         }
         else

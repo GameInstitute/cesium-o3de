@@ -17,7 +17,17 @@ namespace Cesium
     void CriticalAssetManager::OnCatalogLoaded([[maybe_unused]] const char* catalogFile)
     {
         m_standardPbrMaterialType = AZ::RPI::AssetUtils::LoadCriticalAsset<AZ::RPI::MaterialTypeAsset>(STANDARD_PBR_MAT_TYPE);
+        if (!m_standardPbrMaterialType || !m_standardPbrMaterialType.IsReady())
+        {
+            AZ_Error("Cesium", false, "Failed to load critical material type asset: %s", STANDARD_PBR_MAT_TYPE);
+        }
+
         m_rasterMaterialType = AZ::RPI::AssetUtils::LoadCriticalAsset<AZ::RPI::MaterialTypeAsset>(RASTER_MAT_TYPE);
+        if (!m_rasterMaterialType || !m_rasterMaterialType.IsReady())
+        {
+            AZ_Error("Cesium", false, "Failed to load critical material type asset: %s", RASTER_MAT_TYPE);
+        }
+
         AzFramework::AssetCatalogEventBus::Handler::BusDisconnect();
     }
 
