@@ -9,13 +9,15 @@
 #pragma once 
 
 #include <Atom/Features/SrgSemantics.azsli>
+#include <Atom/Features/Decals/DecalStructures.azsli>
+#include <Atom/Features/PBR/Lights/LightStructures.azsli>
 #include <viewsrg.srgi>
 #include <Atom/RPI/ShaderResourceGroups/DefaultDrawSrg.azsli>
 #include <Atom/Features/PBR/LightingOptions.azsli>
 #include <Atom/Features/PBR/AlphaUtils.azsli>
 
 #include "./MaterialInputs/RasterOverlayInput.azsli"
-#include "./MaterialInputs/BaseColorInput.azsli"
+#include <Atom/Feature/Common/Assets/Shaders/Materials/MaterialInputs/BaseColorInput.azsli>
 #include "./MaterialInputs/RoughnessInput.azsli"
 #include "./MaterialInputs/MetallicInput.azsli"
 #include "./MaterialInputs/SpecularInput.azsli"
@@ -23,8 +25,17 @@
 #include "./MaterialInputs/ClearCoatInput.azsli"
 #include "./MaterialInputs/OcclusionInput.azsli"
 #include "./MaterialInputs/EmissiveInput.azsli"
-#include "./MaterialInputs/ParallaxInput.azsli"
 #include "./MaterialInputs/UvSetCount.azsli"
+
+// MaterialParameters struct for ParallaxMapping.azsli
+// This is a minimal struct that satisfies the ParallaxMapping interface
+// Must be defined before ParallaxInput.azsli is included
+struct MaterialParameters
+{
+    // Empty struct - ParallaxMapping.azsli uses this as a parameter but doesn't access any members
+};
+
+#include "./MaterialInputs/ParallaxInput.azsli"
 
 ShaderResourceGroup MaterialSrg : SRG_PerMaterial
 {
@@ -78,9 +89,9 @@ ShaderResourceGroup MaterialSrg : SRG_PerMaterial
 }
 
 // Callback function for ParallaxMapping.azsli
-DepthResult GetDepth(float2 uv, float2 uv_ddx, float2 uv_ddy)
+DepthResult GetDepth(const MaterialParameters params, Texture2D heightmap, sampler mapSampler, float2 uv, float2 uv_ddx, float2 uv_ddy)
 {
-    return SampleDepthFromHeightmap(MaterialSrg::m_heightmap, MaterialSrg::m_sampler, uv, uv_ddx, uv_ddy);
+    return SampleDepthFromHeightmap(heightmap, mapSampler, uv, uv_ddx, uv_ddy);
 }
 
 COMMON_OPTIONS_PARALLAX()

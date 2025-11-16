@@ -11,7 +11,8 @@
 // This file provides utilities for common handling of inputs for a detail layer of PBR materials.
 // This layer includes alternate base color, roughness, normal, etc maps that are tiled on top of the materialtype's main maps.
 
-#include "BaseColorInput.azsli"
+// BaseColorInput.azsli should be included before this file (e.g., via GltfStandardPBR_Common.azsli)
+// #include "BaseColorInput.azsli"
 #include "NormalInput.azsli"
 
 // These macros can be used to declare common shader inputs for this feature. 

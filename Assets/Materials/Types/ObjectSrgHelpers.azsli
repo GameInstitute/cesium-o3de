@@ -1,0 +1,28 @@
+/*
+ * Copyright (c) Contributors to the Open 3D Engine Project.
+ * For complete copyright and license terms please see the LICENSE at the root of this distribution.
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR MIT
+ *
+ */
+
+#pragma once
+
+#include <scenesrg.srgi>
+
+// Helper functions to get world matrix from ObjectSrg
+// These functions provide compatibility with cesium-o3de shaders that use ObjectSrg::GetWorldMatrix()
+
+//! Returns the matrix for transforming points from Object Space to World Space.
+float4x4 GetObjectWorldMatrix()
+{
+    return SceneSrg::GetObjectToWorldMatrix(ObjectSrg::m_objectId);
+}
+
+//! Returns the inverse-transpose of the world matrix.
+//! Commonly used to transform normals while supporting non-uniform scale.
+float3x3 GetObjectWorldMatrixInverseTranspose()
+{
+    return SceneSrg::GetObjectToWorldInverseTransposeMatrix(ObjectSrg::m_objectId);
+}
+

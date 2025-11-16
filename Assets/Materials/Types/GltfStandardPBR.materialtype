@@ -1172,7 +1172,7 @@
             "tag": "DepthPass_WithPS"
         },
         {
-            "file": "Shaders/MotionVector/MeshMotionVector.shader",
+            "file": "Shaders/MotionVector/CameraMotionVector.shader",
             "tag": "MeshMotionVector"
         },
         // Used by the light culling system to produce accurate depth bounds for this object when it uses blended transparency
@@ -1199,7 +1199,17 @@
                 "translateYProperty": "uv.offsetV",
                 "rotateDegreesProperty": "uv.rotateDegrees",
                 "float3x3ShaderInput": "m_uvMatrix",
-                "float3x3InverseShaderInput": "m_uvMatrixInverse"
+                "float3x3InverseShaderInput": "m_uvMatrixInverse",
+                "shaderParameters": [
+                    {
+                        "name": "m_uvMatrix",
+                        "type": "float3x3"
+                    },
+                    {
+                        "name": "m_uvMatrixInverse",
+                        "type": "float3x3"
+                    }
+                ]
             }
         },
         {
@@ -1212,7 +1222,13 @@
                 "ev100Index": 0,
                 "nitIndex" : 1,
                 "ev100MinMax": [-10, 20],
-                "nitMinMax": [0.001, 100000.0]
+                "nitMinMax": [0.001, 100000.0],
+                "shaderParameters": [
+                    {
+                        "name": "m_emissiveIntensity",
+                        "type": "float"
+                    }
+                ]
             }
         },
         {
